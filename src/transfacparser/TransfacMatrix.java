@@ -19,11 +19,13 @@ public class TransfacMatrix {
     private String[] CL;
     private List<String> BF;
     private List<Map<Character,Double>> pwm;
+    private List<String> ensemblID;
     
     public TransfacMatrix(String accessionCode){
         this.accessionCode = accessionCode;
         BF = new ArrayList();
         pwm = new ArrayList();
+        ensemblID = new ArrayList<>();
     }
 
     public String getMatrixID() {
@@ -99,9 +101,30 @@ public class TransfacMatrix {
         System.out.println(this.getTFID());
     }
     
+    public void addEnsemblID(String ensembl){
+        this.ensemblID.add(ensembl);
+    }
+    
+    public List getEnsemblID(){
+        return this.ensemblID;
+    }
+    
     public void printMatrix(){
         for(Map m:this.pwm){
             System.out.println(m.get(TransfacMatrix.A)+"\t"+m.get(TransfacMatrix.C)+"\t"+m.get(TransfacMatrix.G)+"\t"+m.get(TransfacMatrix.T)+"\t");
         }
+    }
+    
+    public String getGeneID(){
+        return this.getGeneID()+"\t"+this.ensemblID.toString();
+    }
+    
+    public boolean isHumanGene(){
+        for(String s:this.BF){
+            if(s.contains("human")){
+                return true;
+            }
+        }
+        return false;
     }
 }
