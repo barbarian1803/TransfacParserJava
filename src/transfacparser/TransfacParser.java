@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package transfacparser;
 
 import java.io.BufferedReader;
@@ -12,20 +7,12 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Arrays;
 
-/**
- *
- * @author Bharata
- */
-public class TransfacParser {
 
-    public static void main(String[] args) {
-        String fileName = args[0];
-        TransfacFile file = TransfacParser.parseTransfacData(fileName);
-    }
+public class TransfacParser {
     
-    private static TransfacFile parseTransfacData(String fileName){
+    public static TransfacFile parseTransfacData(String fileName){
         TransfacFile file = null;
-        //read file into stream, try-with-resources
+        
         FileReader fr = null;
         BufferedReader br=null;
         
@@ -42,7 +29,8 @@ public class TransfacParser {
                     value = line.substring(4);
                 }
                 
-                if(startMatrix){
+                if(!code.equals("XX") && startMatrix){
+
                     String[]values = line.split("[\\s]+");
                     currMatrix.insertPWMValue(Arrays.copyOfRange(values, 1, 5));
                 }
