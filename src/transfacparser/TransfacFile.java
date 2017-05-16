@@ -28,7 +28,7 @@ public class TransfacFile {
         return this.matrices.get(id);
     }
     
-    public Set getMatrixID(){
+    public Set<String> getMatrixID(){
         return this.matrices.keySet();
     }
     
